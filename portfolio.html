@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio Aurel DevStudio — ukázky webů vytvořených v čistém kódu. Before/After srovnání Wix vs vlastní kód.">
+  <title>Portfolio — Aurel DevStudio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Lenis smooth scroll -->
+  <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ── Doplňkové styly specifické pro portfolio ── */
+
+    /* Mockup uvnitř Before/After */
+    .mock-wix {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #f0f0f0;
+    }
+
+    .mock-wix__nav {
+      padding: 10px 16px;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .mock-wix__logo {
+      width: 52px; height: 10px;
+      background: linear-gradient(90deg, #aaa, #ccc);
+      border-radius: 3px;
+    }
+
+    .mock-wix__links {
+      display: flex; gap: 8px; margin-left: auto;
+    }
+
+    .mock-wix__link {
+      width: 32px; height: 8px;
+      background: #ddd; border-radius: 2px;
+    }
+
+    .mock-wix__hero {
+      padding: 24px 16px;
+      background: linear-gradient(135deg, #e8e4ff 0%, #f0e8ff 100%);
+      flex: 1;
+    }
+
+    .mock-wix__h1 {
+      width: 70%; height: 18px;
+      background: linear-gradient(90deg, #8a7aaa, #b09acc);
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .mock-wix__p {
+      width: 55%; height: 10px;
+      background: #c4b8dd;
+      border-radius: 3px;
+      margin-bottom: 6px;
+    }
+
+    .mock-wix__btn {
+      width: 80px; height: 28px;
+      background: #7c6fff;
+      border-radius: 4px;
+      margin-top: 12px;
+    }
+
+    .mock-wix__blocks {
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .mock-wix__block {
+      height: 40px;
+      background: #e0e0e0;
+      border-radius: 4px;
+    }
+
+    /* Aurel mock */
+    .mock-aurel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #0a0a0c;
+    }
+
+    .mock-aurel__nav {
+      padding: 10px 16px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .mock-aurel__logo {
+      width: 80px; height: 10px;
+      background: linear-gradient(90deg, #7c6fff, #5ef0c0);
+      border-radius: 3px;
+    }
+
+    .mock-aurel__links {
+      display: flex; gap: 8px; margin-left: auto;
+    }
+
+    .mock-aurel__link {
+      width: 32px; height: 6px;
+      background: rgba(255,255,255,0.1); border-radius: 2px;
+    }
+
+    .mock-aurel__hero {
+      padding: 24px 16px;
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .mock-aurel__glow {
+      position: absolute;
+      width: 100px; height: 100px;
+      background: radial-gradient(circle, rgba(124,111,255,0.3), transparent 70%);
+      top: -20px; right: -20px;
+    }
+
+    .mock-aurel__h1 {
+      width: 80%; height: 20px;
+      background: linear-gradient(90deg, #e8e8f0, #9090a8);
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+
+    .mock-aurel__h1-2 {
+      width: 60%; height: 20px;
+      background: linear-gradient(90deg, #7c6fff, #5ef0c0);
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .mock-aurel__p {
+      width: 50%; height: 7px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 2px;
+      margin-bottom: 4px;
+    }
+
+    .mock-aurel__btns {
+      display: flex;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .mock-aurel__btn {
+      width: 70px; height: 24px;
+      border-radius: 3px;
+    }
+
+    .mock-aurel__btn--p { background: linear-gradient(135deg, #7c6fff, #5a4de8); }
+    .mock-aurel__btn--g { background: transparent; border: 1px solid rgba(255,255,255,0.15); }
+
+    .mock-aurel__grid {
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .mock-aurel__card {
+      height: 44px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 4px;
+    }
+
+    /* Portfolio filtry */
+    .portfolio-filters {
+      display: flex;
+      gap: var(--sp-3);
+      flex-wrap: wrap;
+      margin-bottom: var(--sp-7);
+    }
+
+    .filter-btn {
+      padding: var(--sp-2) var(--sp-4);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.06em;
+      color: var(--clr-text-2);
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      cursor: none;
+      transition: all var(--dur-fast);
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      color: var(--clr-text);
+      background: var(--clr-surface-2);
+      border-color: var(--clr-accent);
+    }
+
+    /* Portfolio item mockup colors */
+    .portfolio-mock--1 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); }
+    .portfolio-mock--2 { background: linear-gradient(135deg, #0d1117 0%, #161b22 100%); }
+    .portfolio-mock--3 { background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 100%); }
+    .portfolio-mock--4 { background: linear-gradient(135deg, #0a1628 0%, #0d2137 100%); }
+
+    .portfolio-mock-inner {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+    }
+
+    .pm-nav { height: 20px; background: rgba(255,255,255,0.04); border-radius: 4px; margin-bottom: 16px; }
+    .pm-hero { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 0 8px; }
+    .pm-h1 { height: 14px; background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.2)); border-radius: 3px; }
+    .pm-h1--w60 { width: 60%; }
+    .pm-h1--w80 { width: 80%; }
+    .pm-p { height: 7px; background: rgba(255,255,255,0.12); border-radius: 2px; }
+    .pm-p--w40 { width: 40%; }
+    .pm-p--w55 { width: 55%; }
+    .pm-btn { width: 60px; height: 18px; background: #7c6fff; border-radius: 3px; margin-top: 4px; }
+    .pm-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 12px; }
+    .pm-card { height: 28px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 4px; }
+
+    /* Tech badges */
+    .portfolio-tags { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+
+  <div id="loader">
+    <div class="loader__logo">Aurel<span style="color:var(--clr-accent)">.</span></div>
+    <div class="loader__bar"><div class="loader__fill"></div></div>
+    <div class="loader__percent">0%</div>
+  </div>
+
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <canvas id="matrix-canvas" aria-hidden="true"></canvas>
+  <div id="cursor-dot"  aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+
+  <header class="nav" role="banner">
+    <div class="container">
+      <nav class="nav__inner" aria-label="Hlavní navigace">
+        <a href="index.html" class="nav__logo">
+          <span class="nav__logo-dot" aria-hidden="true"></span>
+          Aurel DevStudio
+        </a>
+        <ul class="nav__links" role="list">
+          <li><a href="index.html"    class="nav__link">Domů</a></li>
+          <li><a href="proc-my.html"  class="nav__link">Proč my</a></li>
+          <li><a href="portfolio.html" class="nav__link active">Portfolio</a></li>
+          <li><a href="kontakt.php"   class="nav__link">Kontakt</a></li>
+        </ul>
+        <a href="kontakt.php" class="nav__cta">Nezávazná poptávka</a>
+        <button class="nav__hamburger" aria-label="Otevřít menu">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+    <nav class="nav__mobile" aria-label="Mobilní navigace">
+      <a href="index.html"    class="nav__link">Domů</a>
+      <a href="proc-my.html"  class="nav__link">Proč my</a>
+      <a href="portfolio.html" class="nav__link">Portfolio</a>
+      <a href="kontakt.php"   class="nav__link">Kontakt</a>
+      <a href="kontakt.php"   class="btn btn--primary mt-md" data-magnetic>Poptávka zdarma</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ════════════════════════════════════════════
+         PAGE HEADER
+    ════════════════════════════════════════════ -->
+    <section class="page-header" aria-labelledby="portfolio-title">
+      <div class="grid-lines" aria-hidden="true"></div>
+      <div class="hero__blob hero__blob--1" style="opacity:0.5" aria-hidden="true"></div>
+      <div class="hero__blob hero__blob--2" style="opacity:0.5" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="page-header__tag">
+          <span class="hero__badge">
+            <span class="hero__badge-dot" aria-hidden="true"></span>
+            Naše práce
+          </span>
+        </div>
+        <h1 id="portfolio-title" class="t-display hero__headline">
+          <span class="line"><span class="line-inner">Portfolio</span></span>
+          <span class="line"><span class="line-inner"><span class="highlight">& Výsledky.</span></span></span>
+        </h1>
+        <p class="page-header__sub hero__sub">
+          Každý web stavíme od základů. Čistý kód, žádné šablony, maximální výkon.
+          Prohlédněte si ukázky naší práce.
+        </p>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         BEFORE / AFTER SLIDER
+    ════════════════════════════════════════════ -->
+    <section class="section" aria-labelledby="ba-heading">
+      <div class="container">
+
+        <div class="section-label reveal">
+          <span class="section-label__line" aria-hidden="true"></span>
+          <span class="t-mono">Vizuální srovnání</span>
+        </div>
+
+        <h2 id="ba-heading" class="t-heading reveal" data-decode>
+          Wix vs. vlastní kód.<br>Táhněte a porovnejte.
+        </h2>
+        <p class="t-muted mt-md reveal" style="max-width:520px">
+          Přetáhněte dělicí čáru doprava a doleva, abyste viděli rozdíl
+          mezi šablonovým Wix webem a naším vlastním kódem.
+        </p>
+
+        <!-- Before/After slider -->
+        <div class="ba-container" role="img" aria-label="Porovnání Wix webu a vlastního kódu">
+          <!-- BEFORE — Wix -->
+          <div class="ba-side ba-before">
+            <div class="mock-browser">
+              <div class="mock-browser__bar">
+                <div class="mock-browser__dots" aria-hidden="true">
+                  <span class="mock-browser__dot"></span>
+                  <span class="mock-browser__dot"></span>
+                  <span class="mock-browser__dot"></span>
+                </div>
+                <div class="mock-browser__url"></div>
+              </div>
+              <div class="mock-browser__body" style="padding:0; overflow:hidden; flex:1; display:flex; flex-direction:column;">
+                <div class="mock-wix" style="flex:1">
+                  <div class="mock-wix__nav">
+                    <div class="mock-wix__logo"></div>
+                    <div class="mock-wix__links">
+                      <div class="mock-wix__link"></div>
+                      <div class="mock-wix__link"></div>
+                      <div class="mock-wix__link"></div>
+                    </div>
+                  </div>
+                  <div class="mock-wix__hero" style="flex:1">
+                    <div class="mock-wix__h1"></div>
+                    <div class="mock-wix__p"></div>
+                    <div class="mock-wix__p" style="width:40%"></div>
+                    <div class="mock-wix__btn" data-magnetic></div>
+                  </div>
+                  <div class="mock-wix__blocks">
+                    <div class="mock-wix__block"></div>
+                    <div class="mock-wix__block"></div>
+                    <div class="mock-wix__block"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AFTER — Aurel -->
+          <div class="ba-side ba-after">
+            <div class="mock-browser" style="flex:1; display:flex; flex-direction:column;">
+              <div class="mock-browser__bar">
+                <div class="mock-browser__dots" aria-hidden="true">
+                  <span class="mock-browser__dot" style="background:#ff5f57"></span>
+                  <span class="mock-browser__dot" style="background:#febc2e"></span>
+                  <span class="mock-browser__dot" style="background:#28c840"></span>
+                </div>
+                <div class="mock-browser__url" style="background:rgba(124,111,255,0.1)"></div>
+              </div>
+              <div class="mock-browser__body" style="padding:0; overflow:hidden; flex:1; display:flex; flex-direction:column;">
+                <div class="mock-aurel" style="flex:1">
+                  <div class="mock-aurel__nav">
+                    <div class="mock-aurel__logo"></div>
+                    <div class="mock-aurel__links">
+                      <div class="mock-aurel__link"></div>
+                      <div class="mock-aurel__link"></div>
+                      <div class="mock-aurel__link"></div>
+                    </div>
+                  </div>
+                  <div class="mock-aurel__hero" style="flex:1">
+                    <div class="mock-aurel__glow" aria-hidden="true"></div>
+                    <div class="mock-aurel__h1"></div>
+                    <div class="mock-aurel__h1-2"></div>
+                    <div class="mock-aurel__p"></div>
+                    <div class="mock-aurel__p" style="width:38%"></div>
+                    <div class="mock-aurel__btns" data-magnetic>
+                      <div class="mock-aurel__btn mock-aurel__btn--p" data-magnetic></div>
+                      <div class="mock-aurel__btn mock-aurel__btn--g" data-magnetic></div>
+                    </div>
+                  </div>
+                  <div class="mock-aurel__grid">
+                    <div class="mock-aurel__card"></div>
+                    <div class="mock-aurel__card"></div>
+                    <div class="mock-aurel__card"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Labels -->
+          <span class="ba-label ba-label--before" aria-hidden="true">Wix šablona</span>
+          <span class="ba-label ba-label--after"  aria-hidden="true">Aurel DevStudio</span>
+
+          <!-- Handle -->
+          <div class="ba-handle" role="slider" aria-label="Porovnávací slider" aria-valuemin="5" aria-valuemax="95" aria-valuenow="50">
+            <div class="ba-handle__line" aria-hidden="true"></div>
+            <div class="ba-handle__circle" aria-hidden="true">⟺</div>
+          </div>
+        </div>
+
+        <!-- Metriky pod sliderem -->
+        <div class="stats-row reveal" style="justify-content:center; margin-top: var(--sp-7)">
+          <div class="stat text-center">
+            <div class="stat__number" data-count="3.2" data-suffix="s">0</div>
+            <div class="stat__label">průměrný load Wix</div>
+          </div>
+          <div class="stat text-center" style="border-left: 1px solid var(--clr-border); border-right: 1px solid var(--clr-border); padding: 0 var(--sp-8)">
+            <div class="stat__number" data-count="0.8" data-suffix="s">0</div>
+            <div class="stat__label">náš průměrný load</div>
+          </div>
+          <div class="stat text-center">
+            <div class="stat__number" data-count="4" data-suffix="×">0</div>
+            <div class="stat__label">rychlejší načítání</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         PORTFOLIO GALERIE
+    ════════════════════════════════════════════ -->
+    <section class="section" aria-labelledby="gallery-heading">
+      <div class="container">
+
+        <div class="section-label reveal">
+          <span class="section-label__line" aria-hidden="true"></span>
+          <span class="t-mono">Projekty</span>
+        </div>
+        <h2 id="gallery-heading" class="t-heading reveal" data-decode>
+          Naše projekty.
+        </h2>
+
+        <!-- Filtry -->
+        <div class="portfolio-filters reveal mt-lg" role="group" aria-label="Filtry projektů">
+          <button class="filter-btn active" data-filter="all" data-magnetic>Vše</button>
+          <button class="filter-btn" data-filter="redesign" data-magnetic>Redesign</button>
+          <button class="filter-btn" data-filter="new" data-magnetic>Nový web</button>
+          <button class="filter-btn" data-filter="landing" data-magnetic>Landing page</button>
+        </div>
+
+        <div class="portfolio-grid" data-stagger data-stagger-delay="0.12">
+
+          <!-- Projekt 1 -->
+          <article class="portfolio-item portfolio-mock--1 reveal" data-delay="0" data-category="redesign">
+            <div class="portfolio-mock-inner">
+              <div class="pm-nav"></div>
+              <div class="pm-hero">
+                <div class="pm-h1 pm-h1--w80"></div>
+                <div class="pm-h1 pm-h1--w60" style="background:linear-gradient(90deg,#7c6fff,#5ef0c0)"></div>
+                <div class="pm-p pm-p--w55"></div>
+                <div class="pm-p pm-p--w40"></div>
+                <div class="pm-btn"></div>
+              </div>
+              <div class="pm-cards">
+                <div class="pm-card"></div>
+                <div class="pm-card"></div>
+              </div>
+            </div>
+            <div class="portfolio-item__overlay">
+              <div class="portfolio-tags">
+                <span class="tag">Redesign</span>
+                <span class="tag tag--accent">HTML/CSS/JS</span>
+              </div>
+              <h3 class="t-subheading mt-md" style="font-size:1.1rem">Květinářství Lenka</h3>
+              <p class="t-small t-muted mt-sm">
+                Přepis z Wixu. Načítání z 3,8s na 0,6s. SEO +40% organické návštěvnosti.
+              </p>
+            </div>
+          </article>
+
+          <!-- Projekt 2 -->
+          <article class="portfolio-item portfolio-mock--2 reveal" data-delay="0.1" data-category="new">
+            <div class="portfolio-mock-inner">
+              <div class="pm-nav" style="background:rgba(255,255,255,0.02)"></div>
+              <div class="pm-hero">
+                <div class="pm-h1 pm-h1--w60" style="background:linear-gradient(90deg,#e8e8f0,#5a5a72)"></div>
+                <div class="pm-h1 pm-h1--w80" style="background:linear-gradient(90deg,#5ef0c0,#7c6fff); width:75%"></div>
+                <div class="pm-p pm-p--w55"></div>
+                <div class="pm-p pm-p--w40"></div>
+                <div class="pm-btn" style="background: linear-gradient(135deg,#5ef0c0,#3db88c)" data-magnetic></div>
+              </div>
+              <div class="pm-cards" style="grid-template-columns: 1fr 1fr 1fr">
+                <div class="pm-card"></div>
+                <div class="pm-card"></div>
+                <div class="pm-card"></div>
+              </div>
+            </div>
+            <div class="portfolio-item__overlay">
+              <div class="portfolio-tags">
+                <span class="tag">Nový web</span>
+                <span class="tag tag--accent">GSAP Animations</span>
+              </div>
+              <h3 class="t-subheading mt-md" style="font-size:1.1rem">Řemeslné dílny Novák</h3>
+              <p class="t-small t-muted mt-sm">
+                Nový web od základu. Animace, portfolio galerie, kontaktní formulář.
+              </p>
+            </div>
+          </article>
+
+          <!-- Projekt 3 -->
+          <article class="portfolio-item portfolio-mock--3 reveal" data-delay="0" data-category="landing">
+            <div class="portfolio-mock-inner">
+              <div class="pm-nav" style="background:rgba(124,111,255,0.06)"></div>
+              <div class="pm-hero" style="align-items:center; text-align:center">
+                <div class="pm-h1" style="width:90%; background:linear-gradient(90deg,#fff,#9090a8); height:16px; margin:0 auto"></div>
+                <div class="pm-h1" style="width:70%; background:linear-gradient(90deg,#ff6f91,#7c6fff); margin:6px auto 0"></div>
+                <div class="pm-p" style="width:50%; margin:8px auto 0"></div>
+                <div class="pm-btn" style="background:linear-gradient(135deg,#ff6f91,#c94b6e); margin:8px auto 0" data-magnetic></div>
+              </div>
+              <div class="pm-cards">
+                <div class="pm-card" style="background:rgba(255,111,145,0.06); border-color:rgba(255,111,145,0.15)"></div>
+                <div class="pm-card" style="background:rgba(255,111,145,0.06); border-color:rgba(255,111,145,0.15)"></div>
+              </div>
+            </div>
+            <div class="portfolio-item__overlay">
+              <div class="portfolio-tags">
+                <span class="tag">Landing page</span>
+                <span class="tag tag--accent">ScrollTrigger</span>
+              </div>
+              <h3 class="t-subheading mt-md" style="font-size:1.1rem">Kadeřnictví Monika</h3>
+              <p class="t-small t-muted mt-sm">
+                Digitální vizitka s rezervačním formulářem. Hotová za 5 dní.
+              </p>
+            </div>
+          </article>
+
+          <!-- Projekt 4 -->
+          <article class="portfolio-item portfolio-mock--4 reveal" data-delay="0.1" data-category="redesign">
+            <div class="portfolio-mock-inner">
+              <div class="pm-nav" style="background:rgba(94,240,192,0.03)"></div>
+              <div class="pm-hero">
+                <div class="pm-h1" style="width:85%; background:linear-gradient(90deg,#e8e8f0,#7090a8)"></div>
+                <div class="pm-h1" style="width:65%; background:linear-gradient(90deg,#5ef0c0,#3d9e7e); margin-top:4px"></div>
+                <div class="pm-p pm-p--w55"></div>
+                <div class="pm-p pm-p--w40"></div>
+                <div style="display:flex; gap:6px; margin-top:8px">
+                  <div class="pm-btn" style="background:linear-gradient(135deg,#5ef0c0,#2dcc88)" data-magnetic></div>
+                  <div class="pm-btn" style="background:transparent; border:1px solid rgba(94,240,192,0.3)" data-magnetic></div>
+                </div>
+              </div>
+              <div class="pm-cards" style="grid-template-columns: 1fr 1fr 1fr">
+                <div class="pm-card" style="background:rgba(94,240,192,0.04); border-color:rgba(94,240,192,0.08)"></div>
+                <div class="pm-card" style="background:rgba(94,240,192,0.04); border-color:rgba(94,240,192,0.08)"></div>
+                <div class="pm-card" style="background:rgba(94,240,192,0.04); border-color:rgba(94,240,192,0.08)"></div>
+              </div>
+            </div>
+            <div class="portfolio-item__overlay">
+              <div class="portfolio-tags">
+                <span class="tag">Redesign</span>
+                <span class="tag tag--accent">PHP + GSAP</span>
+              </div>
+              <h3 class="t-subheading mt-md" style="font-size:1.1rem">Kavárna U Starého Mostu</h3>
+              <p class="t-small t-muted mt-sm">
+                Přepis z Webnodu. Nové menu, fotogalerie, rezervace online.
+              </p>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         CTA
+    ════════════════════════════════════════════ -->
+    <section class="section--tight">
+      <div class="container">
+        <div class="cta-banner reveal-scale">
+          <div class="t-mono mb-md" style="color:var(--clr-accent-2)">Váš projekt je na řadě</div>
+          <h2 class="t-heading" data-decode>Přidejte se k nim.</h2>
+          <p class="t-muted mt-md" style="max-width:440px; margin:var(--sp-4) auto 0">
+            První projekt děláme zdarma jako referenci. Zaujal vás nápad?
+          </p>
+          <div class="cta-banner__btns">
+            <a href="kontakt.php" class="btn btn--primary" data-magnetic>Chci svůj web</a>
+            <a href="proc-my.html" class="btn btn--ghost" data-magnetic>Proč vlastní kód?</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <div>
+          <div class="footer__logo">
+            <span class="nav__logo-dot" aria-hidden="true"></span>
+            Aurel DevStudio
+          </div>
+          <p class="footer__desc">Přepisujeme šablonové weby do čistého kódu. Vlastněte svůj web.</p>
+        </div>
+        <div>
+          <div class="footer__col-title">Navigace</div>
+          <ul class="footer__links" role="list">
+            <li><a href="index.html"    class="footer__link">Domů</a></li>
+            <li><a href="proc-my.html"  class="footer__link">Proč my</a></li>
+            <li><a href="portfolio.html" class="footer__link">Portfolio</a></li>
+            <li><a href="kontakt.php"   class="footer__link">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Kontakt</div>
+          <ul class="footer__links" role="list">
+            <li><a href="mailto:info@aureldevstudio.cz" class="footer__link">info@aureldevstudio.cz</a></li>
+            <li><span class="footer__link">Jiří Zlatník</span></li>
+            <li><span class="footer__link">Vilém Orálek</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2025 Aurel DevStudio. Všechna práva vyhrazena.</span>
+        <span>Hand-coded with ♥ in Czech Republic</span>
+      </div>
+    </div>
+  </footer>
+
+<script src="script.js"></script>
+  <script>
+    /* ── Portfolio filtrování ── */
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const items      = document.querySelectorAll('.portfolio-item');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filter = btn.dataset.filter;
+
+          items.forEach(item => {
+            const cat = item.dataset.category;
+            const show = filter === 'all' || cat === filter;
+
+            if (typeof gsap !== 'undefined') {
+              gsap.to(item, {
+                opacity: show ? 1 : 0.2,
+                scale:   show ? 1 : 0.95,
+                duration: 0.4,
+                ease: 'power2.out'
+              });
+            } else {
+              item.style.opacity = show ? '1' : '0.2';
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

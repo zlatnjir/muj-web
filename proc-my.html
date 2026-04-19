@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Proč Aurel DevStudio? Subscription fatigue, vlastní kód vs platformy. Přečtěte si naši filozofii.">
+  <title>Proč my — Aurel DevStudio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Lenis smooth scroll -->
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="loader">
+    <div class="loader__logo">Aurel<span style="color:var(--clr-accent)">.</span></div>
+    <div class="loader__bar"><div class="loader__fill"></div></div>
+    <div class="loader__percent">0%</div>
+  </div>
+
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <canvas id="matrix-canvas" aria-hidden="true"></canvas>
+  <div id="cursor-dot"  aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+
+  <header class="nav" role="banner">
+    <div class="container">
+      <nav class="nav__inner" aria-label="Hlavní navigace">
+        <a href="index.html" class="nav__logo">
+          <span class="nav__logo-dot" aria-hidden="true"></span>
+          Aurel DevStudio
+        </a>
+        <ul class="nav__links" role="list">
+          <li><a href="index.html"    class="nav__link">Domů</a></li>
+          <li><a href="proc-my.html"  class="nav__link active">Proč my</a></li>
+          <li><a href="portfolio.html" class="nav__link">Portfolio</a></li>
+          <li><a href="kontakt.php"   class="nav__link">Kontakt</a></li>
+        </ul>
+        <a href="kontakt.php" class="nav__cta">Nezávazná poptávka</a>
+        <button class="nav__hamburger" aria-label="Otevřít menu">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+    <nav class="nav__mobile" aria-label="Mobilní navigace">
+      <a href="index.html"    class="nav__link">Domů</a>
+      <a href="proc-my.html"  class="nav__link">Proč my</a>
+      <a href="portfolio.html" class="nav__link">Portfolio</a>
+      <a href="kontakt.php"   class="nav__link">Kontakt</a>
+      <a href="kontakt.php"   class="btn btn--primary mt-md" data-magnetic>Poptávka zdarma</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ════════════════════════════════════════════
+         PAGE HEADER
+    ════════════════════════════════════════════ -->
+    <section class="page-header" aria-labelledby="page-title">
+      <div class="grid-lines" aria-hidden="true"></div>
+      <div class="hero__blob hero__blob--1" style="opacity:0.6" aria-hidden="true"></div>
+
+      <div class="container">
+        <div class="page-header__tag">
+          <span class="hero__badge">
+            <span class="hero__badge-dot" aria-hidden="true"></span>
+            Filozofie studia
+          </span>
+        </div>
+        <h1 id="page-title" class="t-display hero__headline">
+          <span class="line"><span class="line-inner">Proč <span class="highlight">vlastní kód</span></span></span>
+          <span class="line"><span class="line-inner">vždy vyhraje.</span></span>
+        </h1>
+        <p class="page-header__sub hero__sub">
+          Věříme, že každý podnikatel si zaslouží web, který mu skutečně patří.
+          Ne pronájem digitálního prostoru. Vlastnictví.
+        </p>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         SUBSCRIPTION FATIGUE
+    ════════════════════════════════════════════ -->
+    <section class="section" aria-labelledby="fatigue-heading">
+      <div class="container">
+
+        <div class="section-label reveal">
+          <span class="section-label__line" aria-hidden="true"></span>
+          <span class="t-mono">Předplatitelská únava</span>
+        </div>
+
+        <h2 id="fatigue-heading" class="t-heading reveal" data-decode>
+          Subscription Fatigue je reálný problém.
+        </h2>
+        <p class="t-body t-muted mt-md reveal" style="max-width:620px">
+          Napočítejte si, kolik platíte měsíčně za software. Spotify, Netflix, Figma, Adobe,
+          hostingové platformy... A web je jenom jedna položka na tomto seznamu. Ale na rozdíl
+          od hudby — web je váš obchodní nástroj. Proč za něj platit věčně?
+        </p>
+
+        <!-- Kalkulačka -->
+        <div class="fatigue-visual reveal-scale" style="margin-top: var(--sp-8)">
+          <div class="cost-calculator">
+            <div class="compare-box__header" style="padding: var(--sp-4) var(--sp-6); background:var(--clr-surface-2)">
+              <div class="compare-box__dots" aria-hidden="true">
+                <span class="compare-box__dot compare-box__dot--r"></span>
+                <span class="compare-box__dot compare-box__dot--y"></span>
+                <span class="compare-box__dot compare-box__dot--g"></span>
+              </div>
+              <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--clr-text-3)">
+                Náklady na web — Wix vs Aurel DevStudio
+              </span>
+            </div>
+
+            <div class="cost-row">
+              <div>
+                <div class="cost-row__label" style="font-weight:600; color:var(--clr-text)">Wix Business (3 roky)</div>
+                <div class="cost-row__label" style="font-size:0.75rem; margin-top:2px">600 Kč/měs × 36 měs.</div>
+              </div>
+              <div class="cost-row__value cost-row__value--bad">−21&nbsp;600 Kč</div>
+            </div>
+            <div class="cost-row">
+              <div>
+                <div class="cost-row__label" style="font-weight:600; color:var(--clr-text)">Aurel DevStudio (3 roky)</div>
+                <div class="cost-row__label" style="font-size:0.75rem; margin-top:2px">Web + 3× doména (400 Kč/rok)</div>
+              </div>
+              <div class="cost-row__value cost-row__value--good">−13&nbsp;200 Kč</div>
+            </div>
+            <div class="cost-row cost-row--total">
+              <div class="cost-row__label">Vaše úspora za 3 roky</div>
+              <div class="cost-row__value cost-row__value--huge" data-count="8400" data-prefix="+" data-suffix=" Kč">0 Kč</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         PLATFORMY vs AUREL — SIDE BY SIDE
+    ════════════════════════════════════════════ -->
+    <section class="section" aria-labelledby="compare-heading">
+      <div class="container">
+
+        <div class="section-label reveal">
+          <span class="section-label__line" aria-hidden="true"></span>
+          <span class="t-mono">Srovnání</span>
+        </div>
+
+        <h2 id="compare-heading" class="t-heading reveal" data-decode>
+          Platformy vs. vlastní kód.
+        </h2>
+
+        <div class="philosophy-split">
+
+          <!-- Platformy — BAD -->
+          <div class="platform-card platform-card--bad reveal-left">
+            <div class="platform-card__header">
+              <span class="platform-card__title">Wix / Webnode / Squarespace</span>
+              <span class="platform-card__badge platform-card__badge--bad">pronájem</span>
+            </div>
+
+            <div class="platform-feature">
+              <span class="platform-feature__icon" style="color:var(--clr-accent-3)" aria-hidden="true">✗</span>
+              <span class="platform-feature__text">Platíte každý měsíc — navždy</span>
+            </div>
+            <div class="platform-feature">
+              <span class="platform-feature__icon" style="color:var(--clr-accent-3)" aria-hidden="true">✗</span>
+              <span class="platform-feature__text">Přestanete platit → web zmizí</span>
+            </div>
+            <div class="platform-feature">
+              <span class="platform-feature__icon" style="color:var(--clr-accent-3)" aria-hidden="true">✗</span>
+              <span class="platform-feature__text">Pomalé načítání (zbytečný kód)</span>
+            </div>
+            <div class="platform-feature">
+              <span class="platform-feature__icon" style="color:var(--clr-accent-3)" aria-hidden="true">✗</span>
+              <span class="platform-feature__text">Omezené možnosti designu</span>
+            </div>
+            <div class="platform-feature">
+              <span class="platform-feature__icon" style="color:var(--clr-accent-3)" aria-hidden="true">✗</span>
+              <span class="platform-feature__text">Data zamčená v platformě</span>
+            </div>
+            <div class="platform-feature">
+              <span class="platform-feature__icon" style="color:var(--clr-accent-3)" aria-hidden="true">✗</span>
+              <span class="platform-feature__text">SEO omezení platformy</span>
+            </div>
+          </div>
+
+          <!-- Aurel — GOOD -->
+          <div class="platform-card platform-card--good reveal-right">
+            <div class="platform-card__header">
+              <span class="platform-card__title">Aurel DevStudio</span>
+              <span class="platform-card__badge platform-card__badge--good">vlastnictví</span>
+            </div>
+
+            <div class="platform-feature">
+              <span class="platform-feature__icon" style="color:var(--clr-accent-2)" aria-hidden="true">✓</span>
+              <span class="platform-feature__text">Jednorázová platba — vlastníte navždy</span>
+            </div>
+            <div class="platform-feature">
+              <span class="platform-feature__icon" style="color:var(--clr-accent-2)" aria-hidden="true">✓</span>
+              <span class="platform-feature__text">Web funguje bez měsíčních poplatků</span>
+            </div>
+            <div class="platform-feature">
+              <span class="platform-feature__icon" style="color:var(--clr-accent-2)" aria-hidden="true">✓</span>
+              <span class="platform-feature__text">Extrémně rychlý čistý kód</span>
+            </div>
+            <div class="platform-feature">
+              <span class="platform-feature__icon" style="color:var(--clr-accent-2)" aria-hidden="true">✓</span>
+              <span class="platform-feature__text">Pixel-perfect custom design</span>
+            </div>
+            <div class="platform-feature">
+              <span class="platform-feature__icon" style="color:var(--clr-accent-2)" aria-hidden="true">✓</span>
+              <span class="platform-feature__text">Zdrojový kód je váš — přenositelný</span>
+            </div>
+            <div class="platform-feature">
+              <span class="platform-feature__icon" style="color:var(--clr-accent-2)" aria-hidden="true">✓</span>
+              <span class="platform-feature__text">Plná kontrola nad SEO</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         CÍLOVÁ SKUPINA
+    ════════════════════════════════════════════ -->
+    <section class="section" aria-labelledby="target-heading">
+      <div class="container text-center">
+
+        <div class="section-label reveal" style="justify-content:center">
+          <span class="section-label__line" aria-hidden="true"></span>
+          <span class="t-mono">Pro koho jsme</span>
+          <span class="section-label__line" aria-hidden="true"></span>
+        </div>
+
+        <h2 id="target-heading" class="t-heading reveal" data-decode>
+          Pracujeme s malými<br>a středními podniky.
+        </h2>
+        <p class="t-muted mt-md reveal" style="max-width:520px; margin-left:auto; margin-right:auto;">
+          Specializujeme se na živnostníky a malé firmy, které potřebují
+          profesionální web bez zbytečných nákladů.
+        </p>
+
+        <div class="target-grid" data-stagger data-stagger-delay="0.08">
+          <div class="target-card">
+            <div class="target-card__emoji" aria-hidden="true">🌸</div>
+            <div class="target-card__name">Květinářství</div>
+          </div>
+          <div class="target-card">
+            <div class="target-card__emoji" aria-hidden="true">🔨</div>
+            <div class="target-card__name">Řemeslníci</div>
+          </div>
+          <div class="target-card">
+            <div class="target-card__emoji" aria-hidden="true">✂️</div>
+            <div class="target-card__name">Kadeřnictví</div>
+          </div>
+          <div class="target-card">
+            <div class="target-card__emoji" aria-hidden="true">☕</div>
+            <div class="target-card__name">Kavárny</div>
+          </div>
+          <div class="target-card">
+            <div class="target-card__emoji" aria-hidden="true">🏋️</div>
+            <div class="target-card__name">Fitness studia</div>
+          </div>
+          <div class="target-card">
+            <div class="target-card__emoji" aria-hidden="true">📸</div>
+            <div class="target-card__name">Fotografové</div>
+          </div>
+          <div class="target-card">
+            <div class="target-card__emoji" aria-hidden="true">🍕</div>
+            <div class="target-card__name">Restaurace</div>
+          </div>
+          <div class="target-card">
+            <div class="target-card__emoji" aria-hidden="true">🏠</div>
+            <div class="target-card__name">Reality</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════
+         REDESIGN ZASTARALÝCH WEBŮ
+    ════════════════════════════════════════════ -->
+    <section class="section" aria-labelledby="redesign-heading">
+      <div class="container">
+
+        <div class="glass-card reveal-scale" style="max-width: 800px; margin: 0 auto; text-align:center; padding: var(--sp-9) var(--sp-8)">
+          <div class="t-mono mb-md" style="color:var(--clr-accent)">Nová příležitost</div>
+          <h2 id="redesign-heading" class="t-heading" data-decode>
+            Zastaralý web je<br>ztráta zákazníků.
+          </h2>
+          <p class="t-body t-muted mt-md" style="max-width:540px; margin-left:auto; margin-right:auto">
+            Pokud váš web vypadá jako z roku 2015, zákazníci odcházejí ke konkurenci.
+            Redesign zastaralého webu je naše silná specialita — přineseme vám moderní,
+            rychlý web za cenu, která se vrátí do 2 let.
+          </p>
+          <div class="flex-center gap-md mt-lg" style="flex-wrap:wrap">
+            <a href="portfolio.html" class="btn btn--outline-accent" data-magnetic>Ukázky redesignů</a>
+            <a href="kontakt.php"    class="btn btn--primary" data-magnetic>Chci redesign</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section--tight">
+      <div class="container">
+        <div class="cta-banner reveal-scale">
+          <div class="t-mono mb-md" style="color:var(--clr-accent-2)">Připraveni?</div>
+          <h2 class="t-heading" data-decode>Začněme spolupráci.</h2>
+          <p class="t-muted mt-md" style="max-width:440px; margin:var(--sp-4) auto 0">
+            Nezávazná konzultace je zdarma. Zjistíme, co váš web potřebuje.
+          </p>
+          <div class="cta-banner__btns">
+            <a href="kontakt.php"    class="btn btn--primary" data-magnetic>Kontaktovat nás</a>
+            <a href="portfolio.html" class="btn btn--ghost" data-magnetic>Prohlédnout portfolio</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <div>
+          <div class="footer__logo">
+            <span class="nav__logo-dot" aria-hidden="true"></span>
+            Aurel DevStudio
+          </div>
+          <p class="footer__desc">Přepisujeme šablonové weby do čistého kódu. Vlastněte svůj web.</p>
+        </div>
+        <div>
+          <div class="footer__col-title">Navigace</div>
+          <ul class="footer__links" role="list">
+            <li><a href="index.html"    class="footer__link">Domů</a></li>
+            <li><a href="proc-my.html"  class="footer__link">Proč my</a></li>
+            <li><a href="portfolio.html" class="footer__link">Portfolio</a></li>
+            <li><a href="kontakt.php"   class="footer__link">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Kontakt</div>
+          <ul class="footer__links" role="list">
+            <li><a href="mailto:info@aureldevstudio.cz" class="footer__link">info@aureldevstudio.cz</a></li>
+            <li><span class="footer__link">Jiří Zlatník</span></li>
+            <li><span class="footer__link">Vilém Orálek</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2025 Aurel DevStudio. Všechna práva vyhrazena.</span>
+        <span>Hand-coded with ♥ in Czech Republic</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
